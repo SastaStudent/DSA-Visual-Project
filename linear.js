@@ -6,16 +6,21 @@ size = 0;
 function fun() {
 
     var input = document.querySelector("#input");
+    var Pdiv=document.createElement('div');
     var mydiv = document.createElement('div');
-    // mydiv.style.width = '5px';
-    // mydiv.style.height = '5px';
     mydiv.style.padding = '4px';
     mydiv.style.fontSize = '2em';
-    mydiv.style.background='#09dceb'
+    mydiv.style.background = '#09dceb';
     mydiv.style.border = '1px solid black';
     mydiv.textContent = input.value;
+    var indexDiv=document.createElement('div');
+    indexDiv.textContent=size;
+    indexDiv.style.textAlign='center';
+    
+    Pdiv.appendChild(mydiv);
+    Pdiv.appendChild(indexDiv);
     if (input.value != "" && size < 15) {
-        init.appendChild(mydiv);
+        init.appendChild(Pdiv);
         size++;
     }
     if (size >= 15) {
@@ -39,11 +44,11 @@ function fun2() {
         
          
         var parent = document.querySelector(".in-act");
-        var childs = parent.querySelectorAll('div');
-        // var out=document.querySelector("#out-act");
+        var childs = parent.querySelectorAll('div> div:first-child');
+        var out=document.querySelector("#out-act");
          var found=false;
         function delayedScale(index) {
-            if (index <size) {
+            if (index <=size && found===false) {
                 
                 setTimeout(function() {
                     childs[index].style.transform = 'scale(1.5)';
@@ -55,13 +60,14 @@ function fun2() {
                         var newDiv = document.createElement('div');
                         newDiv.style.fontSize='1.6em';
                         if (childs[index].textContent == target.value) {
-                          
+                            childs[index].style.transform = 'scale(1)';
+                            index=index-1;
                             newDiv.innerHTML='Comparing Target '+ target.value +' with '+childs[index].textContent + ' Match found at '+ index;
                             out.prepend(newDiv);
-                            childs[index].style.transform = 'scale(1)';
+                            // childs[index].style.transform = 'scale(1)';
                           
                             found=true;
-                            delayedScale(size);
+                            delayedScale(size+1);
                             
                         }else{
                             // var newDiv = document.createElement('div');
@@ -88,7 +94,7 @@ function fun2() {
         }
 
         // Start the delayed scaling from the first child
-        delayedScale(0);
+        delayedScale(1);
         // target.value="";
     }
     // target.value="";
