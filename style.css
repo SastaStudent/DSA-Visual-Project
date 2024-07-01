@@ -36,7 +36,7 @@ body {
     height: 85%;
     background-color: #11d1d8;
 }
-#linear-Search{
+#linear-Search,#binary-search{
     width: 20%;
     height: 18%;
     border-radius: 25px;
