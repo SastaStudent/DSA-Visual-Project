@@ -38,7 +38,7 @@ function binary() {
     if (target.value == "") {
         alert("Please Enter Target Value");
     } else {
-        var value = target.value;
+        var value = parseInt(target.value);
         target.value = "";
         var parent = document.querySelector(".in-act");
         var childs = parent.querySelectorAll('div > div:first-child');
@@ -58,28 +58,36 @@ function binary() {
             
             var mid = Math.floor((st + end) / 2);
             // alert(mid);
-            childs[mid].style.transform = 'scale(1.5)';
-            childs[mid].style.zIndex='1';
-            childs[mid].style.transition = 'transform 1s';
-
-            setTimeout(function () {
+            setTimeout(function(){
+                childs[mid].style.transform = 'scale(1.5)';
+                childs[mid].style.background='#09dceb';
+                childs[mid].style.border='1px solid black';
+                childs[mid].style.zIndex='5';
+                childs[mid].style.transition = 'transform 1s';
                 out.innerHTML = "";
                 var newDiv = document.createElement('div');
                 newDiv.style.fontSize = '1.6em';
                 newDiv.innerHTML = 'Comparing Target ' + value + ' with ' + childs[mid].textContent;
                 out.prepend(newDiv);
 
-                if (childs[mid].textContent == value) {
-                    newDiv.innerHTML += ' Match found at index ' + mid;
-                    childs[mid].style.transform = 'scale(1)';
-                } else if (childs[mid].textContent > value) {
-                    childs[mid].style.transform = 'scale(1)';
-                    search(st, mid - 1);
-                } else {
-                    childs[mid].style.transform = 'scale(1)';
-                    search(mid + 1, end);
-                }
-            }, 2000);
+                setTimeout(function () {
+                
+
+                    if (parseInt(childs[mid].textContent) == value) {
+                        newDiv.innerHTML += ' Match found at index '+(mid-1);
+                        childs[mid].style.transform = 'scale(1)';
+                    } else if (parseInt(childs[mid].textContent) > parseInt(value)) {
+                        childs[mid].style.transform = 'scale(1)';
+                        search(st, mid - 1);
+                    } else {
+                        childs[mid].style.transform = 'scale(1)';
+                        search(mid + 1, end);
+                    }
+                }, 2000);//delay before scale out
+                childs[mid].style.zIndex='0';
+            },1000);//delay before scalling
+
+            
         }
 
         search(1, size);
