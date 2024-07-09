@@ -4,7 +4,7 @@ var init = document.querySelector(".in-act");
 insert.addEventListener('click', fun);
 size = 0;
 function fun() {
-
+ 
     var input = document.querySelector("#input");
     var Pdiv=document.createElement('div');
     var mydiv = document.createElement('div');
@@ -62,7 +62,7 @@ function fun2() {
                         if (childs[index].textContent == target.value) {
                             childs[index].style.transform = 'scale(1)';
                             index=index-1;
-                            newDiv.innerHTML='Comparing Target '+ target.value +' with '+childs[index].textContent + ' Match found at '+ index;
+                            newDiv.innerHTML=target.value +' found at '+ index;
                             out.prepend(newDiv);
                             // childs[index].style.transform = 'scale(1)';
                           
